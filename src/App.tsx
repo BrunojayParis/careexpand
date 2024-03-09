@@ -4,6 +4,7 @@ import { fetchData } from "./fetchData";
 import { Suspense } from "react";
 
 import Nav from "./components/Nav";
+import Form from "./components/Form";
 
 const apiData = fetchData("http://localhost:3000/patients");
 
@@ -12,9 +13,10 @@ function App() {
   return (
     <main className="container">
       <Nav />
+      <Form />
       
-      <Suspense fallback={<div>Loading...</div>}>
         <ul>
+        <Suspense fallback={<div>Loading...</div>}>
           {data?.map((patient: Patient) => (
             <li key={patient.id}>
               <h2>{patient.name}</h2>
@@ -23,8 +25,9 @@ function App() {
               <p>{patient.diagnostic}</p>
             </li>
           ))}
+          </Suspense>
         </ul>
-      </Suspense>
+      
     </main>
   );
 }
