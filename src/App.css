@@ -9,10 +9,32 @@
   height: 100vh;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #fff;
-  text-align: center;
-  padding: 1rem;
+.navigation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  background-color: #001C42;
+  padding: 0.5rem;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  
 }
+
+.doc-picture {
+  grid-column: 1;
+  width: 45px;
+  height: 45px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.title{
+  grid-column: 2;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+
 
