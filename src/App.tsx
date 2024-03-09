@@ -5,29 +5,19 @@ import { Suspense } from "react";
 
 import Nav from "./components/Nav";
 import Form from "./components/Form";
+import PatientList from "./components/PatientList";
 
 const apiData = fetchData("http://localhost:3000/patients");
 
 function App() {
-  const data = apiData.read();
+  const data: Patient[] = apiData.read();
   return (
     <main className="container">
       <Nav />
       <Form />
-      
-        <ul>
-        <Suspense fallback={<div>Loading...</div>}>
-          {data?.map((patient: Patient) => (
-            <li key={patient.id}>
-              <h2>{patient.name}</h2>
-              <p>{patient.genre}</p>
-              <p>{patient.status}</p>
-              <p>{patient.diagnostic}</p>
-            </li>
-          ))}
-          </Suspense>
-        </ul>
-      
+      <Suspense fallback={<p>Loading...</p>}>
+        <PatientList data={data} />
+      </Suspense>
     </main>
   );
 }
