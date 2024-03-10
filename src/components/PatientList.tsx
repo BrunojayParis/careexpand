@@ -5,22 +5,27 @@ import { RootState } from "../app/store";
 
 export default function PatientList() {
 
-  const data: Patient[] = useSelector((state: RootState) => state.patients);
+  const patients: Patient[] = useSelector((state: RootState) => state.patients);
+
   return (
     <ul className="patient-list-container">
-      {data?.map((patient: Patient) => (
-        <li key={patient.id}>
-        <PatientCard
-          id={patient.id}
-          name={patient.name}
-          birthday={patient.birthdate}
-          diagnostic={patient.diagnostic}
-          genre={patient.genre}
-          last={patient.lastModified}
-          status={patient.status}
-        />
-        </li>
-      ))}
+      {patients.length === 0 ? (
+        <p style= {{textAlign: "center", fontWeight: "bold"}}>You have no patients</p>
+      ) : (
+        patients.map((patient: Patient) => (
+          <li key={patient.id}>
+            <PatientCard
+              id={patient.id}
+              name={patient.name}
+              birthday={patient.birthdate}
+              diagnostic={patient.diagnostic}
+              genre={patient.genre}
+              last={patient.lastModified}
+              status={patient.status}
+            />
+          </li>
+        ))
+      )}
     </ul>
   );
 }

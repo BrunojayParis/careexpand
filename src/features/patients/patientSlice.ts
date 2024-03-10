@@ -5,7 +5,7 @@ const initialState: Patient[] = []
 
 
 export const patientSlice = createSlice({
-  name: 'add patient',
+  name: 'patient',
   initialState,
   reducers: {
     addPatient: (state: Patient[], action: PayloadAction<Patient>) => {
@@ -16,7 +16,7 @@ export const patientSlice = createSlice({
     },
     initializePatients: (state: Patient[], action:PayloadAction<Patient[]>) => {
     return [...action.payload, ...state]
-  }
+  },
      
   },
 })

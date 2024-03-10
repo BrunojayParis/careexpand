@@ -71,6 +71,7 @@ export default function Form() {
             name="name"
             placeholder="Name"
             onChange={handleChange}
+            required
           />
           <input
             value={patients.diagnostic}
@@ -79,22 +80,25 @@ export default function Form() {
             name="diagnostic"
             placeholder="Diagnostic"
             onChange={handleChange}
+            required
           />
         </div>
+        <div className="date-genre-status-button">
         <div className="date-genre-status">
           <input
-            
-            type="date"
-            className="date"
-            name="birthdate"
-            onChange={handleChange}
+          type="date"
+          className="date"
+          name="birthdate"
+          onChange={handleChange}
+          max={new Date().toISOString().split('T')[0]}
+          required
           />
-          <select className="genre" name="genre" onChange={handleChange} value={patients.genre}>
+          <select className="genre" name="genre" onChange={handleChange} value={patients.genre} required>
             <option value="">Genre</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
-          <select className="status" name="status" onChange={handleChange} value={patients.status}>
+          <select className="status" name="status" onChange={handleChange} value={patients.status} required>
             <option value="">Status</option>
             <option value="Excellent">Excellent</option>
             <option value="Good">Good</option>
@@ -104,6 +108,7 @@ export default function Form() {
         <button className="add-button" type="submit">
           ADD
         </button>
+        </div>
       </form>
     </div>
   );

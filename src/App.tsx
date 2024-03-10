@@ -1,30 +1,34 @@
 import "./App.css";
-import { Patient } from "./types";
-import { fetchData } from "./fetchData";
-import { Suspense } from "react";
+
 import { useDispatch } from "react-redux";
+import { useFetch } from "./api/useFetch";
+import { useEffect } from "react";
+import { initializePatients } from "./features/patients/patientSlice";
 
 import Nav from "./components/Nav";
 import Form from "./components/Form";
 import PatientList from "./components/PatientList";
-import { initializePatients } from "./features/patients/patientSlice";
 
-const apiData = fetchData("http://localhost:3000/patients");
+
 
 function App() {
-  
   const dispatch = useDispatch();
+  const {data, loading, error } = useFetch("http://localhost:3000/patients");
 
-  const data: Patient[] = apiData.read();
-  dispatch(initializePatients(data));
+  useEffect(() => {
+    if (data) {
+      dispatch(initializePatients(data));
+    }
+  }, [data, dispatch]);
 
   return (
     <main className="container">
       <Nav />
       <Form />
-      <Suspense fallback={<p>Loading...</p>}>
-        <PatientList />
-      </Suspense>
+      {error && <p style={{textAlign: "center", fontWeight: "bold"}}>Error: {error}</p>}
+      {loading && <p style={{textAlign: "center", fontWeight: "bold"}}>Loading...</p>}
+      {data && <PatientList />}
+
     </main>
   );
 }
