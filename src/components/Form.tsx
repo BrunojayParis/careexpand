@@ -1,17 +1,25 @@
 import { useState } from "react";
-import { Patient } from "../types";
+import { useDispatch } from "react-redux";
+import { addPatient } from "../features/patients/patientSlice";
 
 export default function Form() {
+
+  const dispatch = useDispatch();
+
+  //generate id
+  const setId = () => {
+    return '_' + Math.random().toString(36).substring(2);
+  };
+
   //patients state
   const [patients, setPatients] = useState({
-    id: (1/Math.random()).toString(),
     name: "",
     diagnostic: "",
     birthdate: new Date(),
     genre: "",
     status: "",
     lastModified: new Date(),
-  } as Patient);
+  });
 
   //handle change
   const handleChange = (
@@ -24,9 +32,10 @@ export default function Form() {
   //submit handler
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(patients);
+    const id=setId();
 
-
+    //update redux state
+    dispatch(addPatient({id,...patients}));
 
     //post request
     fetch("http://localhost:3000/patients", {
@@ -34,10 +43,20 @@ export default function Form() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(patients),
+      body: JSON.stringify({id,...patients}),
     })
       .then((res) => res.json())
       .catch((error) => console.log("Error:", error));
+
+    //reset form
+    setPatients({
+      name: "",
+      diagnostic: "",
+      birthdate: new Date(),
+      genre: "",
+      status: "",
+      lastModified: new Date(),
+    });
   };
 
 
@@ -46,6 +65,7 @@ export default function Form() {
       <form className="form" onSubmit={handleSubmit}>
         <div className="name-diagnostic">
           <input
+            value={patients.name}
             type="text"
             className="name"
             name="name"
@@ -53,6 +73,7 @@ export default function Form() {
             onChange={handleChange}
           />
           <input
+            value={patients.diagnostic}
             type="text"
             className="diagnostic"
             name="diagnostic"
@@ -62,17 +83,18 @@ export default function Form() {
         </div>
         <div className="date-genre-status">
           <input
+            
             type="date"
             className="date"
             name="birthdate"
             onChange={handleChange}
           />
-          <select className="genre" name="genre" onChange={handleChange}>
+          <select className="genre" name="genre" onChange={handleChange} value={patients.genre}>
             <option value="">Genre</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
-          <select className="status" name="status" onChange={handleChange}>
+          <select className="status" name="status" onChange={handleChange} value={patients.status}>
             <option value="">Status</option>
             <option value="Excellent">Excellent</option>
             <option value="Good">Good</option>
@@ -86,3 +108,4 @@ export default function Form() {
     </div>
   );
 }
+
