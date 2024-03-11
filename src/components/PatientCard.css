@@ -112,19 +112,21 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
-  .patient-name-age-diagnostic{
-    width: 50%;
-  }
-  
-  .patient-genre-status-last{
+
+  .patient-genre-status-last, .patient-name-age-diagnostic{
     width: 50%; 
-    border-top: none;
+    border-top: none;    
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    
   }
   
   .patient-name-age-diagnostic{
-    align-items: center;
-    padding-top: .75rem;
     text-align: left;
   }
   
