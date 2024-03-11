@@ -3,6 +3,8 @@ import PatientCard from "./PatientCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
+import "./PatientList.css";
+
 export default function PatientList() {
 
   const patients: Patient[] = useSelector((state: RootState) => state.patients);

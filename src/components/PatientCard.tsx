@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import { deletePatient } from "../features/patients/patientSlice";
 
+import "./PatientCard.css";
+
 export default function PatientCard({
   id,
   name,

@@ -26,6 +26,7 @@ Instala las dependencias del proyecto utilizando npm
 
 ```js
 npm install
+npm i json-server
 ```
 ## Ejecución
 

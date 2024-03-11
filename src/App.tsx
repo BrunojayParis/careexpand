@@ -27,7 +27,7 @@ function App() {
       <Form />
       {error && <p style={{textAlign: "center", fontWeight: "bold"}}>Error: {error}</p>}
       {loading && <p style={{textAlign: "center", fontWeight: "bold"}}>Loading...</p>}
-      {data && <PatientList />}
+      <PatientList />
 
     </main>
   );
