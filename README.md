@@ -19,7 +19,7 @@ git clone https://github.com/BrunojayParis/careexpand.git
 2. Navega hasta el directorio del proyecto:
 
 ```js
-git clone https://github.com/BrunojayParis/careexpand.git
+cd careexpand
 ```
 
 Instala las dependencias del proyecto utilizando npm
