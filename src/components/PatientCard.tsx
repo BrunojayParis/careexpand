@@ -66,8 +66,6 @@ export default function PatientCard({
           <p className="patient-diagnostic">{diagnostic}</p>
         </div>
         <div className="patient-genre-status-last">
-
-
           <p className="patient-last">
             {daysCalculation(last) > 1
               ? daysCalculation(last) + "days ago "

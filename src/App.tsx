@@ -9,11 +9,9 @@ import Nav from "./components/Nav";
 import Form from "./components/Form";
 import PatientList from "./components/PatientList";
 
-
-
 function App() {
   const dispatch = useDispatch();
-  const {data, loading, error } = useFetch("http://localhost:3000/patients");
+  const { data, loading, error } = useFetch("http://localhost:3000/patients");
 
   useEffect(() => {
     if (data) {
@@ -25,10 +23,16 @@ function App() {
     <main className="container">
       <Nav />
       <Form />
-      {error && <p style={{textAlign: "center", fontWeight: "bold"}}>Error: {error}</p>}
-      {loading && <p style={{textAlign: "center", fontWeight: "bold"}}>Loading...</p>}
-      <PatientList />
+      {error && (
+        <p style={{ textAlign: "center", fontWeight: "bold" }}>
+          Error: {error}
+        </p>
+      )}
+      {loading && (
+        <p style={{ textAlign: "center", fontWeight: "bold" }}>Loading...</p>
+      )}
 
+      <PatientList />
     </main>
   );
 }

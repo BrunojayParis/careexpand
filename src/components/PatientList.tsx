@@ -6,13 +6,14 @@ import { RootState } from "../app/store";
 import "./PatientList.css";
 
 export default function PatientList() {
-
   const patients: Patient[] = useSelector((state: RootState) => state.patients);
 
   return (
     <ul className="patient-list-container">
       {patients.length === 0 ? (
-        <p style= {{textAlign: "center", fontWeight: "bold"}}>You have no patients</p>
+        <p style={{ textAlign: "center", fontWeight: "bold" }}>
+          You have no patients
+        </p>
       ) : (
         patients.map((patient: Patient) => (
           <li key={patient.id}>
