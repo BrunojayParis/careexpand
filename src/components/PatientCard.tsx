@@ -67,8 +67,8 @@ export default function PatientCard({
         </div>
         <div className="patient-genre-status-last">
           <p className="patient-last">
-            {daysCalculation(last) > 1
-              ? daysCalculation(last) + "days ago "
+            {daysCalculation(last) >= 1
+              ? daysCalculation(last) + " days ago "
               : "Today"}
           </p>
           <p className="patient-genre">{genre}</p>
