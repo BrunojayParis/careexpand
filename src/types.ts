@@ -1,9 +1,9 @@
 export type Patient ={
     id: string;
     name: string;
-    birthdate: Date;
+    birthdate: string;
     genre: string;
     status: string;
     diagnostic: string;
-    lastModified: Date;
+    lastModified: string;
 }

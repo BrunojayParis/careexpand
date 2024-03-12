@@ -15,10 +15,10 @@ export default function Form() {
   const [patients, setPatients] = useState({
     name: "",
     diagnostic: "",
-    birthdate: new Date(),
+    birthdate: "",
     genre: "",
     status: "",
-    lastModified: new Date(),
+    lastModified: new Date().toISOString().split("T")[0],
   });
 
   //handle change
@@ -44,17 +44,17 @@ export default function Form() {
     })
       .then((res) => res.json())
       //update redux state
-      .then(() => dispatch(addPatient({ id, ...patients })))
+      .then(() => dispatch(addPatient({ id, ...patients })))//
       .catch((error) => console.log("Error:", error));
 
     //reset form
     setPatients({
       name: "",
       diagnostic: "",
-      birthdate: new Date(),
+      birthdate: "",
       genre: "",
       status: "",
-      lastModified: new Date(),
+      lastModified: new Date().toISOString().split("T")[0],
     });
   };
 
@@ -114,6 +114,7 @@ export default function Form() {
               <option value="Good">Good</option>
               <option value="Bad">Bad</option>
             </select>
+            <input type="date" name="lastModified" id="" value={new Date().toISOString().split("T")[0]} onChange={handleChange} hidden/>
           </div>
           <button className="add-button" type="submit">
             ADD
