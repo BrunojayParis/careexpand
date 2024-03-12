@@ -41,8 +41,6 @@ export default function PatientCard({
 
   //delete handler
   const handleDelete = () => {
-    //update redux state
-    dispatch(deletePatient(id));
 
     fetch(`http://localhost:3000/patients/${id}`, {
       method: "DELETE",
@@ -51,6 +49,8 @@ export default function PatientCard({
       },
     })
       .then((res) => res.json())
+       //update redux state
+      .then(()=> dispatch(deletePatient(id)))
       .catch((error) => console.log("Error:", error));
   };
 

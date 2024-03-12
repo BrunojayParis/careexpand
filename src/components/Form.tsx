@@ -34,9 +34,6 @@ export default function Form() {
     e.preventDefault();
     const id = setId();
 
-    //update redux state
-    dispatch(addPatient({ id, ...patients }));
-
     //post request
     fetch("http://localhost:3000/patients", {
       method: "POST",
@@ -46,6 +43,8 @@ export default function Form() {
       body: JSON.stringify({ id, ...patients }),
     })
       .then((res) => res.json())
+      //update redux state
+      .then(() => dispatch(addPatient({ id, ...patients })))
       .catch((error) => console.log("Error:", error));
 
     //reset form

@@ -25,7 +25,6 @@
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
     align-items: center;
-    
   }
   
   .patient-genre-status-last{
@@ -44,6 +43,9 @@
   
   .patient-name{
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .patient-status, .patient-genre, .patient-last{

@@ -24,12 +24,12 @@ function App() {
       <Nav />
       <Form />
       {error && (
-        <p style={{ textAlign: "center", fontWeight: "bold" }}>
+        <p style={{ textAlign: "center", fontWeight: "bold", marginTop:"1rem"  }}>
           Error: {error}
         </p>
       )}
       {loading && (
-        <p style={{ textAlign: "center", fontWeight: "bold" }}>Loading...</p>
+        <p style={{ textAlign: "center", fontWeight: "bold", marginTop:"1rem" }}>Loading Patients...</p>
       )}
 
       {data && <PatientList />}
