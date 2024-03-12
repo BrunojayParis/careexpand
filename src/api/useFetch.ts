@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Patient } from "../types";
 
 export function useFetch(url: string) {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Patient[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
