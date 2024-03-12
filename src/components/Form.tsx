@@ -89,6 +89,7 @@ export default function Form() {
               name="birthdate"
               onChange={handleChange}
               max={new Date().toISOString().split("T")[0]}
+              value={patients.birthdate}
               required
             />
             <select

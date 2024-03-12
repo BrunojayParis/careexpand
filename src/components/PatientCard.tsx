@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { deletePatient } from "../features/patients/patientSlice";
 
 import "./PatientCard.css";
+import { useState } from "react";
 
 export default function PatientCard({
   id,
@@ -20,9 +21,11 @@ export default function PatientCard({
   last: Date;
   status: string;
 }) {
+
+  const[isDeleting, setIsDeleting] = useState(false)
   const dispatch = useDispatch();
 
-  //date calculation
+    //date calculation
   const yearsCalculation = (birthday: Date) => {
     const date = new Date(birthday);
     const today = new Date();
@@ -41,6 +44,7 @@ export default function PatientCard({
 
   //delete handler
   const handleDelete = () => {
+    setIsDeleting(true)
 
     fetch(`http://localhost:3000/patients/${id}`, {
       method: "DELETE",
@@ -51,7 +55,8 @@ export default function PatientCard({
       .then((res) => res.json())
        //update redux state
       .then(()=> dispatch(deletePatient(id)))
-      .catch((error) => console.log("Error:", error));
+      .catch((error) => console.log("Error:", error))
+      .finally(()=> setIsDeleting(false));
   };
 
   return (
@@ -75,7 +80,7 @@ export default function PatientCard({
           <p className={status}>{status}</p>
         </div>
       </div>
-      <button className="delete-button" onClick={handleDelete}>
+      <button className="delete-button" onClick={handleDelete} disabled={isDeleting} style={isDeleting ? {background:'gray'} : {} }>
         DELETE
       </button>
     </div>
