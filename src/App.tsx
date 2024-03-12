@@ -32,7 +32,7 @@ function App() {
         <p style={{ textAlign: "center", fontWeight: "bold" }}>Loading...</p>
       )}
 
-      <PatientList />
+      {data && <PatientList />}
     </main>
   );
 }
