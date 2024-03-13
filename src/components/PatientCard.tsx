@@ -15,10 +15,10 @@ export default function PatientCard({
 }: {
   id: string;
   name: string;
-  birthday: Date;
+  birthday: string;
   diagnostic: string;
   genre: string;
-  last: Date;
+  last: string;
   status: string;
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -28,14 +28,14 @@ export default function PatientCard({
   const dispatch = useDispatch();
 
   //date calculation
-  const yearsCalculation = (birthday: Date) => {
+  const yearsCalculation = (birthday: string) => {
     const date = new Date(birthday);
     const today = new Date();
     const age = today.getFullYear() - date.getFullYear();
     return age;
   };
 
-  const daysCalculation = (newLast: Date) => {
+  const daysCalculation = (newLast: string) => {
     const date = new Date(newLast);
     const today = new Date();
     const days = Math.floor(
@@ -48,7 +48,7 @@ export default function PatientCard({
   const handleStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newStatus = e.target.value;
     setNewStatus(newStatus);
-    setNewLast(new Date());
+    setNewLast(new Date().toISOString());
 
     fetch(`http://localhost:3000/patients/${id}`, {
       method: "PATCH",
