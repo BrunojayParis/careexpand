@@ -25,6 +25,7 @@
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
     align-items: center;
+
   }
   
   .patient-genre-status-last{
@@ -48,10 +49,13 @@
     text-overflow: ellipsis;
   }
   
-  .patient-status, .patient-genre, .patient-last{
+ .patient-genre, .patient-last{
     text-align: center;
   }
   
+  .patient-status{
+    font-weight: bold;
+  }
   
   .patient-diagnostic{
     grid-column: 3;
@@ -76,12 +80,18 @@
     color: #00C52B;
     font-weight: bold;
     cursor: pointer;
+    max-width: 5rem;
+    border: none;
+    justify-self: center;
   }
   
   .Bad, .Regular{
     color: #ED0000;
     font-weight: bold;
     cursor: pointer;
+    max-width: 5rem;
+    border: none;
+    justify-self: center;
   }
 
   

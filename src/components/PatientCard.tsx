@@ -21,11 +21,13 @@ export default function PatientCard({
   last: Date;
   status: string;
 }) {
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [newStatus, setNewStatus] = useState(status);
+  const [newLast, setNewLast] = useState(last);
 
-  const[isDeleting, setIsDeleting] = useState(false)
   const dispatch = useDispatch();
 
-    //date calculation
+  //date calculation
   const yearsCalculation = (birthday: Date) => {
     const date = new Date(birthday);
     const today = new Date();
@@ -33,8 +35,8 @@ export default function PatientCard({
     return age;
   };
 
-  const daysCalculation = (last: Date) => {
-    const date = new Date(last);
+  const daysCalculation = (newLast: Date) => {
+    const date = new Date(newLast);
     const today = new Date();
     const days = Math.floor(
       (today.getTime() - date.getTime()) / (1000 * 3600 * 24)
@@ -42,9 +44,26 @@ export default function PatientCard({
     return days;
   };
 
+  //update status handler
+  const handleStatus = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = e.target.value;
+    setNewStatus(newStatus);
+    setNewLast(new Date());
+
+    fetch(`http://localhost:3000/patients/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: newStatus, lastModified: new Date().toISOString().split("T")[0]}),
+    })
+      .then((res) => res.json())
+      .catch((error) => console.log("Error:", error));
+  };
+
   //delete handler
   const handleDelete = () => {
-    setIsDeleting(true)
+    setIsDeleting(true);
 
     fetch(`http://localhost:3000/patients/${id}`, {
       method: "DELETE",
@@ -53,10 +72,10 @@ export default function PatientCard({
       },
     })
       .then((res) => res.json())
-       //update redux state
-      .then(()=> dispatch(deletePatient(id)))
+      //update redux state
+      .then(() => dispatch(deletePatient(id)))
       .catch((error) => console.log("Error:", error))
-      .finally(()=> setIsDeleting(false));
+      .finally(() => setIsDeleting(false));
   };
 
   return (
@@ -72,17 +91,34 @@ export default function PatientCard({
         </div>
         <div className="patient-genre-status-last">
           <p className="patient-last">
-            {daysCalculation(last) >= 1
-              ? daysCalculation(last) + " days ago "
+            {daysCalculation(newLast) >= 1
+              ? daysCalculation(newLast) + " days ago "
               : "Today"}
           </p>
           <p className="patient-genre">{genre}</p>
-          <p className={status}>{status}</p>
+          {/* <p className={status}>{status}</p> */}
+          <select
+            className={newStatus}
+            name="status"
+            onChange={handleStatus}
+            value={newStatus}
+            required
+          >
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Bad">Bad</option>
+          </select>
         </div>
       </div>
-      <button className="delete-button" onClick={handleDelete} disabled={isDeleting} style={isDeleting ? {background:'gray'} : {} }>
+      <button
+        className="delete-button"
+        onClick={handleDelete}
+        disabled={isDeleting}
+        style={isDeleting ? { background: "gray" } : {}}
+      >
         DELETE
       </button>
     </div>
   );
 }
+
