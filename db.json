@@ -1,20 +1,11 @@
 {
   "patients": [
     {
-      "id": "_3gqrt6wod4v",
-      "name": "asdasdasda",
-      "diagnostic": "asdasdasdasd",
-      "birthdate": "2000-03-02",
+      "id": "_gspgs932jcu",
+      "name": "DOFHSDKJSNDF",
+      "diagnostic": "KHBKFAJBSKJBA",
+      "birthdate": "2000-01-01",
       "genre": "Male",
-      "status": "Excellent",
-      "lastModified": "2024-03-13"
-    },
-    {
-      "id": "_p3wqgj0bthk",
-      "name": "xczxcz",
-      "diagnostic": "xczxczxc",
-      "birthdate": "2001-02-01",
-      "genre": "Female",
       "status": "Bad",
       "lastModified": "2024-03-13"
     }

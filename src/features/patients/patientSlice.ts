@@ -19,20 +19,10 @@ export const patientSlice = createSlice({
     ) => {
       return [...action.payload, ...state];
     },
-    updatePatient: (state: Patient[], action: PayloadAction<string>) => {
-      return state.map((patient) => {
-        if (patient.id === action.payload) {
-          return {
-            ...patient,
-            lastModified: new Date().toISOString().split("T")[0],
-          };
-        }
-        return patient;
-      }
-      );
+
     }
   },
-});
+);
 
 // Action creators are generated for each case reducer function
 export const { addPatient, deletePatient, initializePatients } =
